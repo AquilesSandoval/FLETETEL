@@ -1,4 +1,15 @@
 
+:root {
+    --primary-color: #0A2F50;
+    --primary-dark: #0A2F50;
+    --secondary-color: #64748b;
+    --accent-color: #f59e0b;
+    --background-light: #f8fafc;
+    --text-dark: #1e293b;
+    --text-light: #f8fafc;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,8 +18,9 @@
 }
 
 body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    min-height: 100vh;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.5;
 }
 
 .container {
@@ -18,11 +30,22 @@ body {
 }
 
 /* Navigation */
-.nav {
-    background-color: #0B2545;
-    color: white;
-    padding: 1rem;
-    
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
 }
 
 .nav .container {
@@ -31,21 +54,29 @@ body {
     align-items: center;
 }
 
-.nav-links {
+.logo {
     display: flex;
-    gap: 1.5rem;
     align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.nav-links a {
-    color: white;
+.nav-item {
+    color: var(--text-light);
     text-decoration: none;
-    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s;
 }
 
-.nav-links a:hover {
-    color: #93c5fd;
+.nav-item:hover {
+    transform: translateY(-2px);
 }
+
+
 
 .btn-empezar {
     background-color: white;
@@ -157,7 +188,6 @@ body {
     color: #4b5563;
 }
 
-/* Partners Section */
 .partners {
     background-color: #f3f4f6;
     padding: 4rem 0;
@@ -210,6 +240,54 @@ body {
     width: 5vw;
     height: 3vw;
     transition: width 0.3s, height 0.3s;
+}
+
+footer {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    padding: 4rem 2rem 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-links a {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {

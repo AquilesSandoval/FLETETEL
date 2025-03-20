@@ -50,6 +50,12 @@ body {
     gap: 2rem;
 }
 
+.nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .nav-item {
     color: var(--text-light);
     text-decoration: none;
