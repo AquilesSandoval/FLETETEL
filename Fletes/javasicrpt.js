@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             z-index: 1000;
             animation: slideIn 0.3s ease-out;
         `;
-        successMessage.textContent = '¡Búsqueda enviada correctamente!';
+        successMessage.textContent = '¡Cotización enviada correctamente!';
         
         document.body.appendChild(successMessage);
         
@@ -84,3 +84,4 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 });
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreo</title>
+    <link rel="icon" type="image/png" href="faviconblue.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="favicon.png" alt="logo" style="height: 30px; width: auto;">
+            <span>Fletetel</span>
+        </div>
+        <div class="nav-links">
+            <a href="paginaprincipal.html" class="nav-item">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-truck-moving"></i>
+                <span>Servicios</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="fas fa-phone"></i>
+                <span>Contacto</span>
+            </a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Rastreo de Envíos</h1>
+            <p>Ingresa tu número de guía para rastrear tu envío</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="tracking-section">
+            <div class="tracking-container">
+                <form id="trackingForm">
+                    <input type="text" id="trackingNumber" placeholder="Número de guía" required>
+                    <button type="submit">Rastrear</button>
+                </form>
+                <div id="trackingResult" class="tracking-result"></div>
+            </div>
+        </section>
+
+        <div id="trackingResult" class="tracking-result"></div>
+        <div id="statusBar" class="status-bar" style="display: none;">
+            <div class="status-step">Enviado</div>
+            <div class="status-step">En camino</div>
+            <div class="status-step">Entregado</div>
+            <div class="logo-icon">
+                <img src="faviconblue.png" alt="Logo">
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-phone"></i> 443-134-7177</p>
+                    <p><i class="fas fa-envelope"></i> info@fletetel.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Horario</h4>
+                    <p>Lunes a Sábado</p>
+                    <p>8:00 AM - 8:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Fletetel. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+        <script src="script.js"></script>
+    </main>
+</body>
+</html>
