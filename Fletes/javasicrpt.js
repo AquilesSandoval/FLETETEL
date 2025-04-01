@@ -85,3 +85,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(style);
 });
 
+// Obtener elementos
+const servicesLink = document.querySelector('.nav-links .nav-item:nth-child(3)'); // Tercer enlace (Servicios)
+const popupServicios = document.getElementById('popup-servicios');
+const closeServiciosBtn = document.getElementById('closeServiciosBtn');
+
+// Abrir el popup de servicios
+servicesLink.addEventListener('click', (e) => {
+    e.preventDefault(); // Evitar comportamiento predeterminado del enlace
+    popupServicios.style.display = 'flex';
+});
+
+// Cerrar el popup de servicios
+closeServiciosBtn.addEventListener('click', () => {
+    popupServicios.style.display = 'none';
+});
+
+// Cerrar el popup al hacer clic fuera del contenido
+window.addEventListener('click', (e) => {
+    if (e.target === popupServicios) {
+        popupServicios.style.display = 'none';
+    }
+});

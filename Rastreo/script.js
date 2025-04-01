@@ -126,23 +126,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // Aquí puedes agregar la lógica para verificar las credenciales del usuario
         // Si las credenciales son correctas, actualiza el enlace de la cuenta
         accountText.innerText = 'Mi Cuenta';
-        loginBtn.href = 'Cuenta/cuenta.html';
+        loginBtn.href = 'cuenta.html';
         loginPopup.style.display = 'none';
     });
 });
 
-// Obtener elementos
-const servicesLink = document.querySelector('.nav-links .nav-item:nth-child(3)'); // Tercer enlace (Servicios)
+// Abrir y cerrar el popup de Servicios
+const servicesLink = document.getElementById('servicesLink');
 const popupServicios = document.getElementById('popup-servicios');
 const closeServiciosBtn = document.getElementById('closeServiciosBtn');
 
-// Abrir el popup de servicios
+// Abrir el popup
 servicesLink.addEventListener('click', (e) => {
-    e.preventDefault(); // Evitar comportamiento predeterminado del enlace
+    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
     popupServicios.style.display = 'flex';
 });
 
-// Cerrar el popup de servicios
+// Cerrar el popup al hacer clic en el botón de cerrar
 closeServiciosBtn.addEventListener('click', () => {
     popupServicios.style.display = 'none';
 });
