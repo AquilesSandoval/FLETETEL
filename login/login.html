@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FleteTel - Iniciar Sesión</title>
+    <title>Iniciar Sesión</title>
+    <link rel="icon" type="image/png" href="../faviconblue.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="min-h-screen">
         <nav class="navbar">
-            <div class="nav-content">
-                <div class="logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/>
-                        <path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/>
-                        <circle cx="7" cy="18" r="2"/>
-                        <circle cx="17" cy="18" r="2"/>
-                    </svg>
-                    <span>FleteTel</span>
-                </div>
+            <div class="logo">
+                <img src="favicon.png" alt="logo" style="height: 30px; width: auto;">
+                <span>Fletetel</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Contacto</span>
+                </a>
             </div>
         </nav>
 
         <div class="page-container">
             <div class="login-container">
                 <div class="login-image">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Delivery Service">
+                    <img src="camion.jpg" alt="Delivery Service">
                 </div>
                 <div class="login-card">
                     <div class="login-header">
@@ -79,6 +84,19 @@
                                 <line x1="15" y1="12" x2="3" y2="12"/>
                             </svg>
                         </button>
+                        <div class="social-login">
+                            <p>O inicia sesión con:</p>
+                            <div class="social-buttons">
+                                <button class="social-button google-button">
+                                    <i class="fab fa-google"></i>
+                                    <span>Google</span>
+                                </button>
+                                <button class="social-button outlook-button">
+                                    <i class="fab fa-microsoft"></i>
+                                    <span>Outlook</span>
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

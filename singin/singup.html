@@ -3,30 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FleteTel - Registro</title>
+    <title>Registro</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="min-h-screen">
         <nav class="navbar">
-            <div class="nav-content">
-                <div class="logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/>
-                        <path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/>
-                        <circle cx="7" cy="18" r="2"/>
-                        <circle cx="17" cy="18" r="2"/>
-                    </svg>
-                    <span>FleteTel</span>
-                </div>
+            <div class="logo">
+                <img src="../favicon.png" alt="logo" style="height: 30px; width: auto;">
+                <span>Fletetel</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
+                </a>
+                <a href="singin/singup.html" class="nav-item" id="accountLink">
+                    <i class="fas fa-user"></i>
+                    <span >Iniciar Sesión</span>
+                    
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-truck-moving"></i>
+                    <span>Servicios</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Contacto</span>
+                </a>
             </div>
         </nav>
 
         <div class="page-container">
             <div class="login-container">
                 <div class="login-image">
-                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Delivery Service">
+                    <img src="../login/camion.jpg" alt="Delivery Service">
                 </div>
                 <div class="login-card">
                     <div class="login-header">
@@ -115,7 +128,7 @@
                         </button>
 
                         <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary);">
-                            ¿Ya tienes una cuenta? <a href="index.html" style="color: var(--primary-color);">Iniciar sesión</a>
+                            ¿Ya tienes una cuenta? <a href="../login/login.html" style="color: var(--primary-color);">Iniciar sesión</a>
                         </p>
                     </form>
                 </div>
