@@ -1,109 +1,101 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const searchForm = document.getElementById('searchForm');
-    
+    const quoteForm = document.getElementById('quoteForm');
+    const modal = document.getElementById('quoteModal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const confirmBtn = document.getElementById('confirmQuote');
+    const quoteDetails = document.getElementById('quoteDetails');
 
+    // Asegurarse de que el modal esté oculto inicialmente
+    modal.style.display = 'none';
+
+    // Set minimum date to today
     const fechaInput = document.getElementById('fecha');
     const today = new Date().toISOString().split('T')[0];
     fechaInput.min = today;
-    
 
-    searchForm.addEventListener('submit', (e) => {
+    // Calculate price based on weight and distance
+    function calculatePrice(weight, origin, destination) {
+        // Base price per kg
+        const pricePerKg = 25;
+        
+        // Distance multiplier (simplified example)
+        const distanceMultiplier = 1.5;
+        
+        // Calculate basic price
+        let price = weight * pricePerKg;
+        
+        // Add distance factor
+        price *= distanceMultiplier;
+        
+        // Add service fee
+        const serviceFee = 500;
+        price += serviceFee;
+        
+        return price;
+    }
+
+    quoteForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
         const formData = {
             origen: document.getElementById('origen').value,
             destino: document.getElementById('destino').value,
             fecha: document.getElementById('fecha').value,
-            hora: document.getElementById('hora').value
+            hora: document.getElementById('hora').value,
+            peso: document.getElementById('peso').value
         };
-        
-    
-        if (formData.fecha < today) {
-            alert('Por favor selecciona una fecha válida');
-            return;
-        }
-        
 
-        console.log('Datos del formulario:', formData);
-        
-     
-        const successMessage = document.createElement('div');
-        successMessage.className = 'success-message';
-        successMessage.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: #10B981;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 1000;
-            animation: slideIn 0.3s ease-out;
+        // Calculate estimated price
+        const estimatedPrice = calculatePrice(parseFloat(formData.peso), formData.origen, formData.destino);
+
+        // Display quote details
+        quoteDetails.innerHTML = `
+            <div class="quote-item">
+                <span class="quote-label">Origen:</span>
+                <span class="quote-value">${formData.origen}</span>
+            </div>
+            <div class="quote-item">
+                <span class="quote-label">Destino:</span>
+                <span class="quote-value">${formData.destino}</span>
+            </div>
+            <div class="quote-item">
+                <span class="quote-label">Fecha:</span>
+                <span class="quote-value">${formData.fecha}</span>
+            </div>
+            <div class="quote-item">
+                <span class="quote-label">Hora:</span>
+                <span class="quote-value">${formData.hora}</span>
+            </div>
+            <div class="quote-item">
+                <span class="quote-label">Peso:</span>
+                <span class="quote-value">${formData.peso} kg</span>
+            </div>
+            <div class="quote-item">
+                <span class="quote-label">Precio Estimado:</span>
+                <span class="quote-value">$${estimatedPrice.toFixed(2)} MXN</span>
+            </div>
         `;
-        successMessage.textContent = '¡Cotización enviada correctamente!';
-        
-        document.body.appendChild(successMessage);
-        
-     
-        setTimeout(() => {
-            successMessage.style.animation = 'slideOut 0.3s ease-out';
-            setTimeout(() => {
-                document.body.removeChild(successMessage);
-            }, 300);
-        }, 3000);
-        
- 
-        searchForm.reset();
+
+        // Show modal
+        modal.style.display = 'flex';
     });
-    
- 
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+
+    // Close modal when clicking the close button
+    closeBtn.onclick = () => {
+        modal.style.display = 'none';
+    };
+
+    // Close modal when clicking outside
+    window.onclick = (e) => {
+        if (e.target == modal) {
+            modal.style.display = 'none';
         }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-});
+    };
 
-// Obtener elementos
-const servicesLink = document.querySelector('.nav-links .nav-item:nth-child(3)'); // Tercer enlace (Servicios)
-const popupServicios = document.getElementById('popup-servicios');
-const closeServiciosBtn = document.getElementById('closeServiciosBtn');
-
-// Abrir el popup de servicios
-servicesLink.addEventListener('click', (e) => {
-    e.preventDefault(); // Evitar comportamiento predeterminado del enlace
-    popupServicios.style.display = 'flex';
-});
-
-// Cerrar el popup de servicios
-closeServiciosBtn.addEventListener('click', () => {
-    popupServicios.style.display = 'none';
-});
-
-// Cerrar el popup al hacer clic fuera del contenido
-window.addEventListener('click', (e) => {
-    if (e.target === popupServicios) {
-        popupServicios.style.display = 'none';
-    }
+    // Handle quote confirmation
+    confirmBtn.onclick = () => {
+        alert('¡Cotización confirmada! Nos pondremos en contacto contigo pronto.');
+        modal.style.display = 'none';
+        quoteForm.reset();
+    };
 });

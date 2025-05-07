@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fletetel - Transporte Confiable</title>
+    <title>Fletetel - Cotizador</title>
     <link rel="icon" type="image/png" href="../faviconblue.png">
     <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar">
         <div class="logo">
-            <img src="favicon.png" alt="logo" style="height: 30px;">
+            <img src="favicon.png" alt="logo" style="height: 30px; width: auto;">
             <span>Fletetel</span>
         </div>
         <div class="nav-links">
@@ -21,45 +21,12 @@
                 <i class="fas fa-home"></i>
                 <span>Inicio</span>
             </a>
-            <a href="#" class="nav-item" >
-                <i class="fas fa-truck-moving"></i>
-                <span>Servicios</span>
-            </a>
             <a href="#" class="nav-item">
                 <i class="fas fa-phone"></i>
                 <span>Contacto</span>
             </a>
         </div>
     </nav>
-
-    <div id="popup-servicios" class="popup-servicios">
-        <div class="popup-content">
-            <span class="close-btn" id="closeServiciosBtn">&times;</span>
-            <h2>Nuestros Servicios</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <i class="fas fa-box"></i>
-                    <h3>Fletes Locales</h3>
-                    <p>Servicio rápido dentro de tu ciudad</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-truck-loading"></i>
-                    <h3>Mudanzas</h3>
-                    <p>Mudanzas completas con personal capacitado</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3>Envíos Nacionales</h3>
-                    <p>Cobertura en todo el país</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-warehouse"></i>
-                    <h3>Almacenaje</h3>
-                    <p>Espacios seguros para tus pertenencias</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <header class="hero">
         <div class="hero-content">
@@ -72,7 +39,7 @@
         <section class="search-container">
             <div class="search-box">
                 <h2>¿A dónde quieres enviar?</h2>
-                <form id="searchForm" class="search-form">
+                <form id="quoteForm" class="search-form">
                     <div class="input-group">
                         <i class="fas fa-map-marker-alt"></i>
                         <input type="text" id="origen" placeholder="Origen" required>
@@ -91,61 +58,75 @@
                             <input type="time" id="hora" required>
                         </div>
                     </div>
+                    <div class="input-group">
+                        <i class="fas fa-weight-hanging"></i>
+                        <input type="number" id="peso" placeholder="Peso aproximado (kg)" required min="1" max="10000">
+                    </div>
                     <button type="submit" class="submit-btn">
-                        <i class="fas fa-search"></i>
+                        <i class="fas fa-calculator"></i>
                         Cotizar Envío
                     </button>
                 </form>
             </div>
         </section>
-
-        <section class="features">
-            <div class="feature-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Seguridad Garantizada</h3>
-                <p>Todos nuestros envíos están asegurados</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-clock"></i>
-                <h3>Puntualidad</h3>
-                <p>Entregas a tiempo, siempre</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-star"></i>
-                <h3>Calidad Premium</h3>
-                <p>Servicio de primera clase</p>
-            </div>
-        </section>
-
-        <section class="services">
-            <h2>Nuestros Servicios</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <i class="fas fa-box"></i>
-                    <h3>Fletes Locales</h3>
-                    <p>Servicio rápido dentro de tu ciudad</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-truck-loading"></i>
-                    <h3>Mudanzas</h3>
-                    <p>Mudanzas completas con personal capacitado</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3>Envíos Nacionales</h3>
-                    <p>Cobertura en todo el país</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-warehouse"></i>
-                    <h3>Almacenaje</h3>
-                    <p>Espacios seguros para tus pertenencias</p>
-                </div>
-            </div>
-        </section>
     </main>
 
-    
+    <div id="quoteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Cotización de Envío</h2>
+            <div id="quoteDetails"></div>
+            <button id="confirmQuote" class="submit-btn">
+                <i class="fas fa-check"></i>
+                Confirmar Cotización
+            </button>
+        </div>
+    </div>
 
+    <section class="features">
+        <div class="feature-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Seguridad Garantizada</h3>
+            <p>Todos nuestros envíos están asegurados</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-clock"></i>
+            <h3>Puntualidad</h3>
+            <p>Entregas a tiempo, siempre</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-star"></i>
+            <h3>Calidad Premium</h3>
+            <p>Servicio de primera clase</p>
+        </div>
+    </section>
+
+    <section class="services">
+        <h2>Nuestros Servicios</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <i class="fas fa-box"></i>
+                <h3>Fletes Locales</h3>
+                <p>Servicio rápido dentro de tu ciudad</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-truck-loading"></i>
+                <h3>Mudanzas</h3>
+                <p>Mudanzas completas con personal capacitado</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-globe-americas"></i>
+                <h3>Envíos Nacionales</h3>
+                <p>Cobertura en todo el país</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-warehouse"></i>
+                <h3>Almacenaje</h3>
+                <p>Espacios seguros para tus pertenencias</p>
+            </div>
+        </div>
+    </section>
+    </main>
 
     <footer>
         <div class="footer-content">
@@ -173,7 +154,7 @@
         </div>
     </footer>
 
-    <script type="module" src="javasicrpt.js"></script>
+    <script src="javasicrpt.js"></script>
 </body>
 
 </html>

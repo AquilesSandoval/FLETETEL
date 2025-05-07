@@ -1,132 +1,154 @@
-const partners = [
-    {
-        name: "COSTCO WHOLESALE",
-        description: "Siempre que compres algo en Costco no temas en preguntar por nosotros",
-        logo: "https://www.costco.com/wcsstore/CostcoGLOBALSAS/images/Costco_Logo-1.png"
-    },
-    {
-        name: "FEDEX",
-        description: "Algunos de los paquetes de Fedex nosotros nos encargamos de entregar",
-        logo: "https://www.fedex.com/content/dam/fedex-com/logos/FedEx-Logo.png"
-    },
-    {
-        name: "PRIVADO",
-        description: "También nos puedes encontrar por privado",
-        logo: "faviconblue.png"
-    }
-];
-
-let currentPartner = 0;
-const partnerContent = document.querySelector('.partner-content');
-const partnerLogo = document.getElementById('partnerLogo');
-const partnerName = document.getElementById('partnerName');
-const partnerDescription = document.getElementById('partnerDescription');
-
-function updatePartner() {
- 
-    partnerContent.classList.add('fade-out');
-    partnerLogo.classList.add('fade-out');
-
-    setTimeout(() => {
-        
-        currentPartner = (currentPartner + 1) % partners.length;
-        partnerName.textContent = partners[currentPartner].name;
-        partnerDescription.textContent = partners[currentPartner].description;
-        partnerLogo.src = partners[currentPartner].logo;
-        partnerLogo.alt = `${partners[currentPartner].name} Logo`;
-
-      
-        partnerContent.classList.remove('fade-out');
-        partnerLogo.classList.remove('fade-out');
-    }, 500);
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('trackingForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const trackingNumber = document.getElementById('trackingNumber').value;
-        const trackingResult = document.getElementById('trackingResult');
-        if (trackingNumber.length === 6) {
-            trackingResult.innerText = 'Número de guía válido. Mostrando estado del envío...';
-            trackingResult.classList.remove('error-message');
-            trackingResult.classList.add('success-message');
-            const statusBar = document.getElementById('statusBar');
-            statusBar.style.display = 'flex';
-            const steps = statusBar.getElementsByClassName('status-step');
-            const logoIcon = statusBar.getElementsByClassName('logo-icon')[0];
-            for (let i = 0; i < steps.length; i++) {
-                steps[i].classList.remove('active');
-                const dateInfo = steps[i].querySelector('.date-info');
-                if (dateInfo) {
-                    dateInfo.innerHTML = ''; // Clear previous date info
+    // Get all navigation links and tab contents
+    const navLinks = document.querySelectorAll('.account-nav a');
+    const cards = document.querySelectorAll('.account-card');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    // Function to show a specific tab
+    function showTab(tabId) {
+        // Hide all tab contents
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+        });
+        
+        // Show the selected tab content
+        const selectedTab = document.getElementById(tabId);
+        if (selectedTab) {
+            selectedTab.classList.add('active');
+        }
+        
+        // Update active state in sidebar navigation
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('data-tab') === tabId) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Save the active tab to sessionStorage
+        sessionStorage.setItem('activeTab', tabId);
+    }
+    
+    // Set up click event for sidebar navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const tabId = this.getAttribute('data-tab');
+            showTab(tabId);
+        });
+    });
+    
+    // Set up click event for dashboard cards
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            showTab(tabId);
+        });
+    });
+    
+    // Check if there's a saved active tab in sessionStorage
+    const activeTab = sessionStorage.getItem('activeTab');
+    
+    // Show the saved tab or default to dashboard
+    if (activeTab && document.getElementById(activeTab)) {
+        showTab(activeTab);
+    } else {
+        showTab('tab-dashboard');
+    }
+    
+    // Form submissions
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const formId = this.id;
+            const successMessage = document.querySelector(`#${formId}-success`);
+            
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Reset form
+            this.reset();
+        });
+    });
+    
+    // Payment method selection
+    const paymentMethods = document.querySelectorAll('.payment-method-card');
+    paymentMethods.forEach(method => {
+        method.addEventListener('click', function() {
+            paymentMethods.forEach(m => m.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+    
+    // Address editing
+    const editButtons = document.querySelectorAll('.btn-edit-address');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const addressId = this.getAttribute('data-address');
+            const addressCard = document.querySelector(`.address-card[data-address="${addressId}"]`);
+            const addressForm = document.querySelector(`#edit-address-${addressId}`);
+            
+            if (addressCard && addressForm) {
+                addressCard.style.display = 'none';
+                addressForm.style.display = 'block';
+            }
+        });
+    });
+    
+    // Cancel address editing
+    const cancelButtons = document.querySelectorAll('.btn-cancel-edit');
+    cancelButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const addressId = this.getAttribute('data-address');
+            const addressCard = document.querySelector(`.address-card[data-address="${addressId}"]`);
+            const addressForm = document.querySelector(`#edit-address-${addressId}`);
+            
+            if (addressCard && addressForm) {
+                addressCard.style.display = 'block';
+                addressForm.style.display = 'none';
+            }
+        });
+    });
+    
+    // Order details toggle
+    const viewDetailsButtons = document.querySelectorAll('.view-order-details');
+    viewDetailsButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const orderId = this.getAttribute('data-order');
+            const orderDetails = document.querySelector(`.order-details-expanded[data-order="${orderId}"]`);
+            
+            if (orderDetails) {
+                if (orderDetails.style.display === 'block') {
+                    orderDetails.style.display = 'none';
+                    this.textContent = 'Ver detalles';
+                } else {
+                    orderDetails.style.display = 'block';
+                    this.textContent = 'Ocultar detalles';
                 }
             }
-            steps[0].classList.add('active');
-            addDateInfo(steps[0], 'Enviado');
-            logoIcon.classList.remove('move');
-            logoIcon.style.left = '0';
+        });
+    });
+    
+    // Add a shipping animation to represent a freight company
+    const truckIcon = document.querySelector('.truck-animation');
+    if (truckIcon) {
+        setInterval(() => {
+            truckIcon.classList.add('drive');
             setTimeout(() => {
-                steps[1].classList.add('active');
-                addDateInfo(steps[1], 'En camino');
-                logoIcon.style.left = 'calc(50% - 37.5px)';
+                truckIcon.classList.remove('drive');
             }, 2000);
-            setTimeout(() => {
-                steps[2].classList.add('active');
-                addDateInfo(steps[2], 'Entregado');
-                logoIcon.style.left = 'calc(100% - 37.5px)'; // Move to the center of the last status
-            }, 4000);
-        } else {
-            trackingResult.innerText = 'Número de guía inválido. Por favor, ingrese un número de guía de 6 dígitos.';
-            trackingResult.classList.remove('success-message');
-            trackingResult.classList.add('error-message');
-            document.getElementById('statusBar').style.display = 'none';
-        }
-    });
-
-    function addDateInfo(stepElement, status) {
-        const now = new Date();
-        const dateString = `${status}: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-        const dateElement = document.createElement('div');
-        dateElement.classList.add('date-info');
-        dateElement.innerText = dateString;
-        stepElement.appendChild(dateElement);
+        }, 5000);
     }
-});
-
-setInterval(updatePartner, 4000);
-
-document.addEventListener('DOMContentLoaded', function() {
-    const loginBtn = document.getElementById('accountLink');
-    const loginPopup = document.getElementById('loginPopup');
-    const closeBtn = document.getElementById('closeBtn');
-    const loginForm = document.getElementById('loginForm');
-    const accountText = document.getElementById('accountText');
-
-    loginBtn.addEventListener('click', function(event) {
-        if (accountText.innerText === 'Iniciar Sesión') {
-            event.preventDefault();
-            loginPopup.style.display = 'block';
-        } else {
-            location.href = 'cuenta.html';
-        }
-    });
-
-    closeBtn.addEventListener('click', function() {
-        loginPopup.style.display = 'none';
-    });
-
-    window.addEventListener('click', function(event) {
-        if (event.target == loginPopup) {
-            loginPopup.style.display = 'none';
-        }
-    });
-
-    loginForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        // Aquí puedes agregar la lógica para verificar las credenciales del usuario
-        // Si las credenciales son correctas, actualiza el enlace de la cuenta
-        accountText.innerText = 'Mi Cuenta';
-        loginBtn.href = 'cuenta.html';
-        loginPopup.style.display = 'none';
-    });
 });

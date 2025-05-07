@@ -9,6 +9,103 @@
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
+/* Modal styles */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+    transform: translateY(0);
+}
+
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--secondary-color);
+    transition: color 0.2s;
+}
+
+.close:hover {
+    color: var(--text-dark);
+}
+
+#quoteDetails {
+    margin: 2rem 0;
+}
+
+.quote-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid var(--background-light);
+}
+
+.quote-item:last-child {
+    border-bottom: none;
+    font-weight: bold;
+}
+
+.quote-label {
+    color: var(--secondary-color);
+}
+
+.quote-value {
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* El resto de tus estilos existentes... */
+
+
+/* Input group styles */
+.input-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.input-group input[type="number"] {
+    width: 100%;
+    padding: 1rem;
+    padding-left: 3rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Rest of your existing styles... */
+
+
 * {
     margin: 0;
     padding: 0;

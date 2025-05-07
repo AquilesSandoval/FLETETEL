@@ -17,6 +17,21 @@ async function handleLogin(event) {
     const password = document.getElementById('password').value;
 
     try {
+        // Verificar credenciales de superusuario
+        if (username === 'admin' && password === '12345') {
+            // Guardar información del usuario
+            localStorage.setItem('user', JSON.stringify({
+                id: 'admin',
+                username: 'admin',
+                role: 'superuser'
+            }));
+            
+            // Redirigir a cuenta.html
+            window.location.href = '../Cuenta/cuenta.html';
+            return;
+        }
+
+        // Si no es superusuario, continuar con la verificación normal
         const response = await fetch('http://localhost:8000/login.php', {
             method: 'POST',
             headers: {
@@ -30,7 +45,7 @@ async function handleLogin(event) {
         if (data.success) {
             // Guardar información del usuario
             localStorage.setItem('user', JSON.stringify(data.user));
-            // Redirigir a Cuenta/cuenta.html
+            // Redirigir a cuenta.html
             window.location.href = '../Cuenta/cuenta.html';
 
             // Mostrar mensaje de bienvenida

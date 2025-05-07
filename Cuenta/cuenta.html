@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta</title>
+    <title>Mi Cuenta - Fletetel</title>
     <link rel="icon" type="image/png" href="faviconblue.png">
     <link rel="stylesheet" href="cuentaStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -18,10 +18,6 @@
             <a href="../index.html" class="nav-item">
                 <i class="fas fa-home"></i>
                 <span>Inicio</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-truck-moving"></i>
-                <span>Servicios</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="fas fa-phone"></i>
@@ -39,59 +35,581 @@
             </div>
             <nav class="account-nav">
                 <ul>
-                    <li><a href="#"><i class="fas fa-home"></i> Escritorio</a></li>
-                    <li><a href="#"><i class="fas fa-box"></i> Pedidos</a></li>
-                    <li><a href="#"><i class="fas fa-download"></i> Descargas</a></li>
-                    <li><a href="#"><i class="fas fa-user"></i> Editar cuenta</a></li>
-                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> Editar direcciones</a></li>
-                    <li><a href="#"><i class="fas fa-credit-card"></i> Métodos de pago</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    <li><a href="#" data-tab="tab-dashboard" class="active"><i class="fas fa-home"></i> Escritorio</a></li>
+                    <li><a href="#" data-tab="tab-orders"><i class="fas fa-box"></i> Pedidos</a></li>
+                    <li><a href="#" data-tab="tab-downloads"><i class="fas fa-download"></i> Descargas</a></li>
+                    <li><a href="#" data-tab="tab-edit-account"><i class="fas fa-user"></i> Editar cuenta</a></li>
+                    <li><a href="#" data-tab="tab-edit-addresses"><i class="fas fa-map-marker-alt"></i> Editar direcciones</a></li>
+                    <li><a href="#" data-tab="tab-payment-methods"><i class="fas fa-credit-card"></i> Métodos de pago</a></li>
+                    <li><a href="#" data-tab="tab-contact"><i class="fas fa-envelope"></i> Contacto</a></li>
                 </ul>
             </nav>
         </aside>
         <main class="account-main">
-            <h1>Mi Fletetel</h1>
-            <div class="account-cards">
-                <div class="account-card">
-                    <i class="fas fa-box"></i>
-                    <h3>Mis pedidos</h3>
-                    <p>Gestiona los pedidos de tus cursos y tutoriales exclusivos.</p>
-                    <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+            <!-- Dashboard Tab (Default) -->
+            <div id="tab-dashboard" class="tab-content active">
+                <h1>Mi Fletetel <i class="fas fa-truck-moving truck-animation"></i></h1>
+                <div class="account-cards">
+                    <div class="account-card" data-tab="tab-orders">
+                        <i class="fas fa-box"></i>
+                        <h3>Mis pedidos</h3>
+                        <p>Gestiona tus servicios de flete y envíos contratados.</p>
+                        <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="account-card" data-tab="tab-downloads">
+                        <i class="fas fa-download"></i>
+                        <h3>Mis descargas</h3>
+                        <p>Descarga facturas e información de tus fletes.</p>
+                        <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="account-card" data-tab="tab-edit-account">
+                        <i class="fas fa-user"></i>
+                        <h3>Editar cuenta</h3>
+                        <p>Actualiza tu información personal y contraseña.</p>
+                        <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="account-card" data-tab="tab-edit-addresses">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Editar direcciones</h3>
+                        <p>Configura tus direcciones de recogida y entrega.</p>
+                        <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="account-card" data-tab="tab-payment-methods">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>Métodos de pago</h3>
+                        <p>Gestiona tus formas de pago para servicios de flete.</p>
+                        <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="account-card" data-tab="tab-contact">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Contacto</h3>
+                        <p>¿Necesitas ayuda? Contáctanos para soporte.</p>
+                        <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
-                <div class="account-card">
-                    <i class="fas fa-download"></i>
-                    <h3>Mis descargas</h3>
-                    <p>Desde aquí puedes revisar tu historial de descargas.</p>
-                    <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Orders Tab -->
+            <div id="tab-orders" class="tab-content">
+                <h1>Mis Pedidos</h1>
+                <div class="orders-section">
+                    <div class="orders-list">
+                        <div class="order-item">
+                            <div class="order-id">#FLT-8675</div>
+                            <div class="order-info">Mudanza residencial - CDMX a Guadalajara</div>
+                            <div class="order-date">23/03/2024</div>
+                            <div class="order-status status-completed">Completado</div>
+                            <div class="order-actions">
+                                <a href="#" class="btn view-order-details" data-order="8675">Ver detalles</a>
+                            </div>
+                        </div>
+                        
+                        <div class="order-details-expanded" data-order="8675" style="display: none;">
+                            <div class="order-details-card">
+                                <div class="order-route">
+                                    <div class="route-point">
+                                        <i class="fas fa-circle"></i>
+                                        <div class="point-details">
+                                            <br>
+                                            <h4>Origen</h4>
+                                            <p>Av. Insurgentes Sur 1602, CDMX</p>
+                                            <p>Fecha de recogida: 20/03/2024</p>
+                                        </div>
+                                    </div>
+                                    <div class="route-line"></div>
+                                    <div class="route-point">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <div class="point-details">
+                                            <br>
+                                            <h4>Destino</h4>
+                                            <p>Av. Vallarta 3233, Guadalajara</p>
+                                            <p>Fecha de entrega: 23/03/2024</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Servicio:</span>
+                                        <span class="detail-value">Mudanza residencial completa</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Conductor:</span>
+                                        <span class="detail-value">Miguel Hernández</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Vehículo:</span>
+                                        <span class="detail-value">Camión 3.5 toneladas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Total:</span>
+                                        <span class="detail-value">$12,500 MXN</span>
+                                    </div>
+                                </div>
+                                <div class="order-actions-expanded">
+                                    <a href="#" class="btn"><i class="fas fa-file-invoice"></i> Descargar factura</a>
+                                    <a href="#" class="btn"><i class="fas fa-star"></i> Calificar servicio</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-item">
+                            <div class="order-id">#FLT-7548</div>
+                            <div class="order-info">Envío de muebles - Monterrey a Puebla</div>
+                            <div class="order-date">15/02/2024</div>
+                            <div class="order-status status-processing">En proceso</div>
+                            <div class="order-actions">
+                                <a href="#" class="btn view-order-details" data-order="7548">Ver detalles</a>
+                            </div>
+                        </div>
+                        
+                        <div class="order-details-expanded" data-order="7548" style="display: none;">
+                            <div class="order-details-card">
+                                <div class="order-route">
+                                    <div class="route-point">
+                                        <i class="fas fa-circle"></i>
+                                        <div class="point-details">
+                                            <br>
+                                            <h4>Origen</h4>
+                                            <p>Av. Constitución 1254, Monterrey</p>
+                                            <p>Fecha de recogida: 15/02/2024</p>
+                                        </div>
+                                    </div>
+                                    <div class="route-line processing"></div>
+                                    <div class="route-point">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <div class="point-details">
+                                            <br>
+                                            <h4>Destino</h4>
+                                            <p>Blvd. Atlixco 3156, Puebla</p>
+                                            <p>Fecha estimada: 20/02/2024</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tracking-status">
+                                    <div class="tracking-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 65%"></div>
+                                        </div>
+                                        <div class="tracking-points">
+                                            <div class="tracking-point active">
+                                                <div class="point"></div>
+                                                <div class="point-label">Recogido</div>
+                                            </div>
+                                            <div class="tracking-point active">
+                                                <div class="point"></div>
+                                                <div class="point-label">En tránsito</div>
+                                            </div>
+                                            <div class="tracking-point">
+                                                <div class="point"></div>
+                                                <div class="point-label">Entregado</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Servicio:</span>
+                                        <span class="detail-value">Envío de muebles</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Conductor:</span>
+                                        <span class="detail-value">Carlos Mendoza</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Vehículo:</span>
+                                        <span class="detail-value">Camión 5 toneladas</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Total:</span>
+                                        <span class="detail-value">$8,750 MXN</span>
+                                    </div>
+                                </div>
+                                <div class="order-actions-expanded">
+                                    <a href="#" class="btn"><i class="fas fa-truck-loading"></i> Actualizar estado</a>
+                                    <a href="#" class="btn"><i class="fas fa-phone"></i> Contactar conductor</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-item">
+                            <div class="order-id">#FLT-6453</div>
+                            <div class="order-info">Transporte de mercancía - Tijuana a CDMX</div>
+                            <div class="order-date">05/01/2024</div>
+                            <div class="order-status status-cancelled">Cancelado</div>
+                            <div class="order-actions">
+                                <a href="#" class="btn view-order-details" data-order="6453">Ver detalles</a>
+                            </div>
+                        </div>
+                        
+                        <div class="order-details-expanded" data-order="6453" style="display: none;">
+                            <div class="order-details-card">
+                                <div class="order-cancelled-info">
+                                    <i class="fas fa-times-circle"></i>
+                                    <h3>Pedido cancelado</h3>
+                                    <p>Este pedido fue cancelado el 04/01/2024 a las 14:30.</p>
+                                    <p>Motivo: Cliente solicitó la cancelación</p>
+                                </div>
+                                <div class="order-details-grid">
+                                    <div class="detail-item">
+                                        <span class="detail-label">Servicio:</span>
+                                        <span class="detail-value">Transporte de mercancía</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Origen:</span>
+                                        <span class="detail-value">Av. Revolución 2145, Tijuana</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Destino:</span>
+                                        <span class="detail-value">Av. Reforma 222, CDMX</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">Reembolso:</span>
+                                        <span class="detail-value">$3,500 MXN (50%)</span>
+                                    </div>
+                                </div>
+                                <div class="order-actions-expanded">
+                                    <a href="#" class="btn"><i class="fas fa-sync-alt"></i> Reagendar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="account-card">
-                    <i class="fas fa-user"></i>
-                    <h3>Editar cuenta</h3>
-                    <p>Edita los detalles de tu cuenta, cambia tu contraseña, etc.</p>
-                    <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Downloads Tab -->
+            <div id="tab-downloads" class="tab-content">
+                <h1>Mis Descargas</h1>
+                <div class="downloads-section">
+                    <div class="downloads-list">
+                        <div class="download-item">
+                            <div class="download-info">
+                                <h3>Factura #FLT-8675</h3>
+                                <p>Mudanza residencial - CDMX a Guadalajara</p>
+                                <p class="download-date">Fecha: 23/03/2024</p>
+                            </div>
+                            <div class="download-type">
+                                <span class="file-type pdf">PDF</span>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="btn-download"><i class="fas fa-download"></i> Descargar</a>
+                            </div>
+                        </div>
+                        <div class="download-item">
+                            <div class="download-info">
+                                <h3>Comprobante de entrega #FLT-8675</h3>
+                                <p>Mudanza residencial - CDMX a Guadalajara</p>
+                                <p class="download-date">Fecha: 23/03/2024</p>
+                            </div>
+                            <div class="download-type">
+                                <span class="file-type pdf">PDF</span>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="btn-download"><i class="fas fa-download"></i> Descargar</a>
+                            </div>
+                        </div>
+                        <div class="download-item">
+                            <div class="download-info">
+                                <h3>Factura #FLT-7548</h3>
+                                <p>Envío de muebles - Monterrey a Puebla</p>
+                                <p class="download-date">Fecha: 15/02/2024</p>
+                            </div>
+                            <div class="download-type">
+                                <span class="file-type pdf">PDF</span>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="btn-download"><i class="fas fa-download"></i> Descargar</a>
+                            </div>
+                        </div>
+                        <div class="download-item">
+                            <div class="download-info">
+                                <h3>Cotización #COT-9823</h3>
+                                <p>Mudanza comercial - Querétaro a Veracruz</p>
+                                <p class="download-date">Fecha: 10/01/2024</p>
+                            </div>
+                            <div class="download-type">
+                                <span class="file-type xlsx">XLSX</span>
+                            </div>
+                            <div class="download-actions">
+                                <a href="#" class="btn-download"><i class="fas fa-download"></i> Descargar</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="account-card">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Editar direcciones</h3>
-                    <p>Edita y configura tu dirección de envío y de facturación.</p>
-                    <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Edit Account Tab -->
+            <div id="tab-edit-account" class="tab-content">
+                <h1>Editar Cuenta</h1>
+                <div class="edit-account-section">
+                    <form id="edit-account-form" class="edit-form">
+                        <div class="form-group">
+                            <label for="first-name">Nombre</label>
+                            <input type="text" id="first-name" class="form-control" value="Aquiles" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Apellido</label>
+                            <input type="text" id="last-name" class="form-control" value="Sandoval" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="display-name">Nombre de usuario</label>
+                            <input type="text" id="display-name" class="form-control" value="aquiles.sandoval">
+                            <p class="form-help">Este nombre será visible cuando interactúes con servicios de Fletetel.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" class="form-control" value="aquiles.sandoval@ejemplo.com" required>
+                        </div>
+                        
+                        <h3 class="form-section-title">Cambiar contraseña</h3>
+                        <div class="form-group">
+                            <label for="current-password">Contraseña actual</label>
+                            <input type="password" id="current-password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">Nueva contraseña</label>
+                            <input type="password" id="new-password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirmar nueva contraseña</label>
+                            <input type="password" id="confirm-password" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" class="form-control" value="555-123-4567">
+                        </div>
+                        
+                        <div class="form-group form-actions">
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                        
+                        <div id="edit-account-form-success" class="success-message" style="display: none;">
+                            <i class="fas fa-check-circle"></i> Los cambios se han guardado correctamente.
+                        </div>
+                    </form>
                 </div>
-                <div class="account-card">
-                    <i class="fas fa-credit-card"></i>
-                    <h3>Métodos de pago</h3>
-                    <p>Desde aquí puedes editar o agregar tus métodos de pago.</p>
-                    <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Edit Addresses Tab -->
+            <div id="tab-edit-addresses" class="tab-content">
+                <h1>Mis Direcciones</h1>
+                <div class="edit-addresses-section">
+                    <div class="addresses-grid">
+                        <!-- Shipping Address -->
+                        <div class="address-container">
+                            <div class="address-card" data-address="shipping">
+                                <h3><i class="fas fa-truck"></i> Dirección de recogida</h3>
+                                <p>Aquiles Sandoval</p>
+                                <p>Av. Insurgentes Sur 1602</p>
+                                <p>Col. Crédito Constructor</p>
+                                <p>Ciudad de México, 03940</p>
+                                <p>México</p>
+                                <p>555-123-4567</p>
+                                <div class="address-actions">
+                                    <a href="#" class="btn btn-outline btn-edit-address" data-address="shipping">Editar</a>
+                                </div>
+                            </div>
+                            <form id="edit-address-shipping" class="edit-form address-edit-form" style="display: none;">
+                                <h3>Editar dirección de recogida</h3>
+                                <div class="form-group">
+                                    <label for="shipping-name">Nombre completo</label>
+                                    <input type="text" id="shipping-name" class="form-control" value="Aquiles Sandoval" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-address1">Dirección línea 1</label>
+                                    <input type="text" id="shipping-address1" class="form-control" value="Av. Insurgentes Sur 1602" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-address2">Dirección línea 2</label>
+                                    <input type="text" id="shipping-address2" class="form-control" value="Col. Crédito Constructor">
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-city">Ciudad</label>
+                                    <input type="text" id="shipping-city" class="form-control" value="Ciudad de México" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-postcode">Código postal</label>
+                                    <input type="text" id="shipping-postcode" class="form-control" value="03940" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-country">País</label>
+                                    <select id="shipping-country" class="form-control" required>
+                                        <option value="MX" selected>México</option>
+                                        <option value="US">Estados Unidos</option>
+                                        <option value="CA">Canadá</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="shipping-phone">Teléfono</label>
+                                    <input type="tel" id="shipping-phone" class="form-control" value="555-123-4567" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    <a href="#" class="btn btn-outline btn-cancel-edit" data-address="shipping">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Billing Address -->
+                        <div class="address-container">
+                            <div class="address-card" data-address="billing">
+                                <h3><i class="fas fa-map-marker-alt"></i> Dirección de entrega</h3>
+                                <p>Aquiles Sandoval</p>
+                                <p>Av. Vallarta 3233</p>
+                                <p>Col. Vallarta Norte</p>
+                                <p>Guadalajara, Jalisco, 44690</p>
+                                <p>México</p>
+                                <p>333-456-7890</p>
+                                <div class="address-actions">
+                                    <a href="#" class="btn btn-outline btn-edit-address" data-address="billing">Editar</a>
+                                </div>
+                            </div>
+                            <form id="edit-address-billing" class="edit-form address-edit-form" style="display: none;">
+                                <h3>Editar dirección de entrega</h3>
+                                <div class="form-group">
+                                    <label for="billing-name">Nombre completo</label>
+                                    <input type="text" id="billing-name" class="form-control" value="Aquiles Sandoval" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-address1">Dirección línea 1</label>
+                                    <input type="text" id="billing-address1" class="form-control" value="Av. Vallarta 3233" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-address2">Dirección línea 2</label>
+                                    <input type="text" id="billing-address2" class="form-control" value="Col. Vallarta Norte">
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-city">Ciudad</label>
+                                    <input type="text" id="billing-city" class="form-control" value="Guadalajara" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-state">Estado</label>
+                                    <input type="text" id="billing-state" class="form-control" value="Jalisco" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-postcode">Código postal</label>
+                                    <input type="text" id="billing-postcode" class="form-control" value="44690" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-country">País</label>
+                                    <select id="billing-country" class="form-control" required>
+                                        <option value="MX" selected>México</option>
+                                        <option value="US">Estados Unidos</option>
+                                        <option value="CA">Canadá</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="billing-phone">Teléfono</label>
+                                    <input type="tel" id="billing-phone" class="form-control" value="333-456-7890" required>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                                    <a href="#" class="btn btn-outline btn-cancel-edit" data-address="billing">Cancelar</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="account-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Contacto</h3>
-                    <p>¿Necesitas soporte o ayuda? Ponte en contacto.</p>
-                    <a href="#" class="account-card-link"><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Payment Methods Tab -->
+            <div id="tab-payment-methods" class="tab-content">
+                <h1>Métodos de Pago</h1>
+                <div class="payment-methods-section">
+                    <div class="payment-methods-list">
+                        <div class="payment-method-card">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-cc-visa"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>Visa terminada en 4532</h3>
+                                <p>Expira: 08/2025</p>
+                            </div>
+                            <div class="payment-method-status">
+                                <span class="default-badge">Predeterminada</span>
+                            </div>
+                            <div class="payment-method-actions">
+                                <button class="btn btn-outline btn-sm">Editar</button>
+                                <button class="btn btn-outline btn-sm btn-danger">Eliminar</button>
+                            </div>
+                        </div>
+                        <div class="payment-method-card">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-cc-mastercard"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>Mastercard terminada en 8765</h3>
+                                <p>Expira: 05/2024</p>
+                            </div>
+                            <div class="payment-method-status">
+                                
+                            </div>
+                            <div class="payment-method-actions">
+                                <button class="btn btn-outline btn-sm">Editar</button>
+                                <button class="btn btn-outline btn-sm">Predeterminada</button>
+                                <button class="btn btn-outline btn-sm btn-danger">Eliminar</button>
+                            </div>
+                        </div>
+                        <button class="btn-add">
+                            <i class="fas fa-plus"></i> Agregar método de pago
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Tab -->
+            <div id="tab-contact" class="tab-content">
+                <h1>Contacto</h1>
+                <div class="contact-section">
+                    <div class="contact-options">
+                        <div class="contact-option">
+                            <i class="fas fa-phone"></i>
+                            <h3>Teléfono</h3>
+                            <p>Atención al cliente: 800-FLETETEL</p>
+                            <p>Lun-Sáb, 8am-8pm</p>
+                        </div>
+                        <div class="contact-option">
+                            <i class="fas fa-comment"></i>
+                            <h3>Chat en vivo</h3>
+                            <p>Soporte en tiempo real</p>
+                            <p>Disponible 24/7</p>
+                        </div>
+                        <div class="contact-option">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email</h3>
+                            <p>soporte@fletetel.com</p>
+                            <p>Respuesta en 24 horas</p>
+                        </div>
+                    </div>
+                    <div class="contact-form-container">
+                        <h2>Envíanos un mensaje</h2>
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="contact-subject">Asunto</label>
+                                <select id="contact-subject" class="form-control" required>
+                                    <option value="">Selecciona un asunto</option>
+                                    <option value="cotizacion">Solicitud de cotización</option>
+                                    <option value="pregunta">Pregunta sobre servicio</option>
+                                    <option value="queja">Queja</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact-message">Mensaje</label>
+                                <textarea id="contact-message" class="form-control" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                            </div>
+                            <div id="contact-form-success" class="success-message" style="display: none;">
+                                <i class="fas fa-check-circle"></i> Tu mensaje ha sido enviado. Te responderemos lo antes posible.
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
-    
 
     <footer>
         <div class="footer-content">
@@ -118,6 +636,7 @@
             <p>&copy; 2024 Fletetel. Todos los derechos reservados.</p>
         </div>
     </footer>
-    <script src="script.js"></script>
+    <script src="tabs.js"></script>
+    <script src="animations.js"></script>
 </body>
 </html>

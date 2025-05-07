@@ -1,155 +1,148 @@
-const partners = [
-    {
-        name: "COSTCO WHOLESALE",
-        description: "Siempre que compres algo en Costco no temas en preguntar por nosotros",
-        logo: "https://www.costco.com/wcsstore/CostcoGLOBALSAS/images/Costco_Logo-1.png"
-    },
-    {
-        name: "FEDEX",
-        description: "Algunos de los paquetes de Fedex nosotros nos encargamos de entregar",
-        logo: "https://www.fedex.com/content/dam/fedex-com/logos/FedEx-Logo.png"
-    },
-    {
-        name: "PRIVADO",
-        description: "También nos puedes encontrar por privado",
-        logo: "faviconblue.png"
-    }
-];
-
-let currentPartner = 0;
-const partnerContent = document.querySelector('.partner-content');
-const partnerLogo = document.getElementById('partnerLogo');
-const partnerName = document.getElementById('partnerName');
-const partnerDescription = document.getElementById('partnerDescription');
-
-function updatePartner() {
- 
-    partnerContent.classList.add('fade-out');
-    partnerLogo.classList.add('fade-out');
-
-    setTimeout(() => {
-        
-        currentPartner = (currentPartner + 1) % partners.length;
-        partnerName.textContent = partners[currentPartner].name;
-        partnerDescription.textContent = partners[currentPartner].description;
-        partnerLogo.src = partners[currentPartner].logo;
-        partnerLogo.alt = `${partners[currentPartner].name} Logo`;
-
-      
-        partnerContent.classList.remove('fade-out');
-        partnerLogo.classList.remove('fade-out');
-    }, 500);
-}
-
 document.addEventListener('DOMContentLoaded', function() {
+    // Shipping details database
+    const shipments = {
+        '123456': {
+            status: 'delivered',
+            origin: 'Ciudad de México',
+            destination: 'Guadalajara',
+            type: 'Mudanza Residencial',
+            weight: '2,500 kg',
+            vehicle: 'Camión 3.5 toneladas',
+            driver: 'Miguel Hernández',
+            price: '$12,500 MXN',
+            timeline: [
+                { status: 'Enviado', date: '2024-03-20 08:00' },
+                { status: 'En camino', date: '2024-03-20 10:30' },
+                { status: 'Entregado', date: '2024-03-20 16:45' }
+            ]
+        },
+        '789012': {
+            status: 'in_transit',
+            origin: 'Monterrey',
+            destination: 'Puebla',
+            type: 'Flete Comercial',
+            weight: '1,800 kg',
+            vehicle: 'Camión 5 toneladas',
+            driver: 'Carlos Mendoza',
+            price: '$8,750 MXN',
+            timeline: [
+                { status: 'Enviado', date: '2024-03-21 09:15' },
+                { status: 'En camino', date: '2024-03-21 11:00' }
+            ]
+        },
+        '345678': {
+            status: 'pending',
+            origin: 'Tijuana',
+            destination: 'Mérida',
+            type: 'Mudanza Empresarial',
+            weight: '4,200 kg',
+            vehicle: 'Camión 10 toneladas',
+            driver: 'Roberto Sánchez',
+            price: '$28,900 MXN',
+            timeline: [
+                { status: 'Enviado', date: '2024-03-21 14:30' }
+            ]
+        }
+    };
+
     document.getElementById('trackingForm').addEventListener('submit', function(event) {
         event.preventDefault();
         const trackingNumber = document.getElementById('trackingNumber').value;
         const trackingResult = document.getElementById('trackingResult');
-        if (trackingNumber.length === 6) {
-            trackingResult.innerText = 'Número de guía válido. Mostrando estado del envío...';
-            trackingResult.classList.remove('error-message');
-            trackingResult.classList.add('success-message');
+        const shipmentDetails = document.getElementById('shipmentDetails');
+        
+        if (shipments[trackingNumber]) {
+            const shipment = shipments[trackingNumber];
+            
+            // Show tracking result
+            trackingResult.innerHTML = `
+                <div class="tracking-info">
+                    <h2>Información del Envío</h2>
+                    <div class="shipment-grid">
+                        <div class="info-item">
+                            <span class="label">Origen:</span>
+                            <span class="value">${shipment.origin}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Destino:</span>
+                            <span class="value">${shipment.destination}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Tipo de Servicio:</span>
+                            <span class="value">${shipment.type}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Peso:</span>
+                            <span class="value">${shipment.weight}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Vehículo:</span>
+                            <span class="value">${shipment.vehicle}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Conductor:</span>
+                            <span class="value">${shipment.driver}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Precio:</span>
+                            <span class="value">${shipment.price}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Show status bar
             const statusBar = document.getElementById('statusBar');
             statusBar.style.display = 'flex';
-            const steps = statusBar.getElementsByClassName('status-step');
-            const logoIcon = statusBar.getElementsByClassName('logo-icon')[0];
-            for (let i = 0; i < steps.length; i++) {
-                steps[i].classList.remove('active');
-                const dateInfo = steps[i].querySelector('.date-info');
-                if (dateInfo) {
-                    dateInfo.innerHTML = ''; // Clear previous date info
-                }
-            }
-            steps[0].classList.add('active');
-            addDateInfo(steps[0], 'Enviado');
-            logoIcon.classList.remove('move');
-            logoIcon.style.left = '0';
+            statusBar.innerHTML = `
+                <div class="status-timeline">
+                    ${shipment.timeline.map((step, index) => `
+                        <div class="timeline-step ${index === shipment.timeline.length - 1 ? 'current' : 'completed'}">
+                            <div class="step-icon">
+                                <i class="fas ${getStatusIcon(step.status)}"></i>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-title">${step.status}</div>
+                                <div class="step-date">${formatDate(step.date)}</div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            // Add animation class
             setTimeout(() => {
-                steps[1].classList.add('active');
-                addDateInfo(steps[1], 'En camino');
-                logoIcon.style.left = 'calc(50% - 37.5px)';
-            }, 2000);
-            setTimeout(() => {
-                steps[2].classList.add('active');
-                addDateInfo(steps[2], 'Entregado');
-                logoIcon.style.left = 'calc(100% - 37.5px)'; // Move to the center of the last status
-            }, 4000);
+                document.querySelector('.truck-animation').classList.add('moving');
+            }, 100);
+            
         } else {
-            trackingResult.innerText = 'Número de guía inválido. Por favor, ingrese un número de guía de 6 dígitos.';
-            trackingResult.classList.remove('success-message');
-            trackingResult.classList.add('error-message');
-            document.getElementById('statusBar').style.display = 'none';
+            trackingResult.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Número de guía no encontrado. Por favor, verifique e intente nuevamente.
+                </div>
+            `;
+            statusBar.style.display = 'none';
         }
     });
-
-    function addDateInfo(stepElement, status) {
-        const now = new Date();
-        const dateString = `${status}: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-        const dateElement = document.createElement('div');
-        dateElement.classList.add('date-info');
-        dateElement.innerText = dateString;
-        stepElement.appendChild(dateElement);
+    
+    function getStatusIcon(status) {
+        switch(status) {
+            case 'Enviado': return 'fa-box';
+            case 'En camino': return 'fa-truck-moving';
+            case 'Entregado': return 'fa-check-circle';
+            default: return 'fa-circle';
+        }
     }
-});
-
-setInterval(updatePartner, 4000);
-
-document.addEventListener('DOMContentLoaded', function() {
-    const loginBtn = document.getElementById('accountLink');
-    const loginPopup = document.getElementById('loginPopup');
-    const closeBtn = document.getElementById('closeBtn');
-    const loginForm = document.getElementById('loginForm');
-    const accountText = document.getElementById('accountText');
-
-    loginBtn.addEventListener('click', function(event) {
-        if (accountText.innerText === 'Iniciar Sesión') {
-            event.preventDefault();
-            loginPopup.style.display = 'block';
-        } else {
-            location.href = 'cuenta.html';
-        }
-    });
-
-    closeBtn.addEventListener('click', function() {
-        loginPopup.style.display = 'none';
-    });
-
-    window.addEventListener('click', function(event) {
-        if (event.target == loginPopup) {
-            loginPopup.style.display = 'none';
-        }
-    });
-
-    loginForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        // Aquí puedes agregar la lógica para verificar las credenciales del usuario
-        // Si las credenciales son correctas, actualiza el enlace de la cuenta
-        accountText.innerText = 'Mi Cuenta';
-        loginBtn.href = 'cuenta.html';
-        loginPopup.style.display = 'none';
-    });
-});
-
-// Abrir y cerrar el popup de Servicios
-const servicesLink = document.getElementById('servicesLink');
-const popupServicios = document.getElementById('popup-servicios');
-const closeServiciosBtn = document.getElementById('closeServiciosBtn');
-
-// Abrir el popup
-servicesLink.addEventListener('click', (e) => {
-    e.preventDefault(); // Evitar el comportamiento predeterminado del enlace
-    popupServicios.style.display = 'flex';
-});
-
-// Cerrar el popup al hacer clic en el botón de cerrar
-closeServiciosBtn.addEventListener('click', () => {
-    popupServicios.style.display = 'none';
-});
-
-// Cerrar el popup al hacer clic fuera del contenido
-window.addEventListener('click', (e) => {
-    if (e.target === popupServicios) {
-        popupServicios.style.display = 'none';
+    
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleString('es-MX', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
     }
 });
