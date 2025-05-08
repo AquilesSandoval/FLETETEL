@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fletetel - Cotizador</title>
-    <link rel="icon" type="image/png" href="../faviconblue.png">
-    <link rel="stylesheet" href="style2.css">
+    <link rel="icon" type="image/png" href="favicon.png"> <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=MXN"></script>
 </head>
 
 <body>
@@ -17,13 +16,16 @@
             <span>Fletetel</span>
         </div>
         <div class="nav-links">
-            <a href="../index.html" class="nav-item">
-                <i class="fas fa-home"></i>
+            <a href="../index.html" class="nav-item"> <i class="fas fa-home"></i>
                 <span>Inicio</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="fas fa-phone"></i>
                 <span>Contacto</span>
+            </a>
+            <a href="#" class="nav-item" id="logoutButton" style="display:none;">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
             </a>
         </div>
     </nav>
@@ -73,15 +75,69 @@
 
     <div id="quoteModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
+            <span class="close" id="closeQuoteModal">&times;</span>
             <h2>Cotización de Envío</h2>
-            <div id="quoteDetails"></div>
-            <button id="confirmQuote" class="submit-btn">
-                <i class="fas fa-check"></i>
-                Confirmar Cotización
-            </button>
+            <div id="quoteDetails">
+                </div>
+            <div id="paypal-button-container" style="margin-top:15px;">
+                </div>
         </div>
     </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLoginModal">&times;</span>
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="loginUsername" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Ingresar
+                </button>
+                <p class="form-message" id="loginMessage"></p>
+            </form>
+            <p class="modal-switch">¿No tienes cuenta? <a href="#" id="showRegisterModalLink">Regístrate aquí</a></p>
+        </div>
+    </div>
+
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeRegisterModal">&times;</span>
+            <h2>Crear Cuenta</h2>
+            <form id="registerForm">
+                <div class="input-group">
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" id="registerNombre" placeholder="Nombre Completo" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="registerEmail" placeholder="Correo Electrónico" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="registerUsername" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="registerPassword" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-user-plus"></i>
+                    Registrarse
+                </button>
+                <p class="form-message" id="registerMessage"></p>
+            </form>
+            <p class="modal-switch">¿Ya tienes cuenta? <a href="#" id="showLoginModalLink">Inicia sesión aquí</a></p>
+        </div>
+    </div>
+
 
     <section class="features">
         <div class="feature-card">
@@ -126,7 +182,6 @@
             </div>
         </div>
     </section>
-    </main>
 
     <footer>
         <div class="footer-content">
@@ -150,11 +205,11 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Fletetel. Todos los derechos reservados.</p>
+            <p>&copy; <span id="currentYear"></span> Fletetel. Todos los derechos reservados.</p>
         </div>
     </footer>
 
+   
     <script src="javasicrpt.js"></script>
 </body>
-
 </html>

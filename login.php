@@ -10,10 +10,10 @@ header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
 
 // Información del servidor
-$host = "db-fletetel-pro.c3mwwk2mi6ry.us-east-2.rds.amazonaws.com";
+$host = "flete.c3mwwk2mi6ry.us-east-2.rds.amazonaws.com";
 $dbname = "fletetel";
 $username = "admin";
-$password = "201135Sata";
+$password = "fletetel";
 $port = 3306;
 
 try {
