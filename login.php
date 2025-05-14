@@ -13,7 +13,7 @@ header('Content-Type: application/json');
 $host = "flete.c3mwwk2mi6ry.us-east-2.rds.amazonaws.com";
 $dbname = "fletetel";
 $username = "admin";
-$password = "fletetel";
+$password = "";
 $port = 3306;
 
 try {
